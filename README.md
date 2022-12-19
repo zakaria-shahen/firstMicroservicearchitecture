@@ -1,6 +1,14 @@
 ## first Microservice architecture 
 
-### services/servers
+### Project Repository
+
+- [firstmicroservice](https://github.com/zakaria-shahen/firstmicroservice)
+- [firstspringconfigurationserver](https://github.com/zakaria-shahen/firstspringconfigurationserver)
+- [firstSpringeurekaserverDiscovery](https://github.com/zakaria-shahen/firstSpringeurekaserverDiscovery)
+- [fristSpringCloudGateway](https://github.com/zakaria-shahen/fristSpringCloudGateway)
+- [secondMicroservice](https://github.com/zakaria-shahen/secondMicroservice)
+
+### Services/Servers
 
 1. config-server                 
 2. gateway-server                
@@ -63,22 +71,22 @@
         vault kv put secret/firstmicroservice  test.vault="Hello, Vault"
       ```
     
-#### services links
+#### Services links
 
-- [keycloak:8085](keycloak:8085)
-- first_microservice [localhost:8080](localhost:8080)
-- second_microservice [localhost:8081](localhost:8081)
-- zipkin [localhost:9411](localhost:9411)
-- elasticsearch [localhost:9200](localhost:9200)
+- keycloak: [http://keycloak:8085](http://keycloak:8085)
+- first_microservice: [http://localhost:8080](http://localhost:8080)
+- second_microservice: [http://localhost:8081](http://localhost:8081)
+- zipkin: [http://localhost:9411](http://localhost:9411)
+- elasticsearch: [http://localhost:9200](http://localhost:9200)
 
 ### **NOTE**: not use IDEA to run config server with vault [ref](https://github.com/spring-cloud/spring-cloud-config/issues/1973#issuecomment-1312764350) but use cli with spring-boot:run
 ```shell 
 ./mvnw spring-boot:run
 ```
 
-### redeploy one service
+### Redeploy one service
 
-#### terminal
+#### Terminal
 
     ```shell
      ./mvnw install spring-boot:repackage -DskipTests &&
@@ -92,4 +100,4 @@ Add New Run Configuration:
   ![docker_compose_with_idea](/README_IMAGE/docker_compose_with_idea.png)
 
 
-### NOTE: if run with Eureka client config in your localhost (pc) without docker and your host (pc) installed docker-desktop.. problem may occur.. [link](https://stackoverflow.com/a/63283687/15107127)
+### NOTE: if run with Eureka client in your localhost (pc) without docker and your host (pc) installed docker-desktop.. problem may occur.. [link](https://stackoverflow.com/a/63283687/15107127)
