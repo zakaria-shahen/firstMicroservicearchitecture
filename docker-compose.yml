@@ -45,6 +45,8 @@ services:
       ELASTICSEARCH_URL: http://elasticsearch:9300
     ports:
       - "5601:5601"
+    depends_on:
+      - elasticsearch
     networks:
       backend:
         aliases:
@@ -98,7 +100,7 @@ services:
           - "zipkin"
 
   gateway-server:
-    image: mycompany/fristspringcloudgateway:0.0.1-SNAPSHOT
+    image: mycompany/firstspringcloudgateway:0.0.1-SNAPSHOT
 #    build: FristSpringCloudGateway/
     container_name: gateway-server
     ports:
@@ -110,7 +112,7 @@ services:
     depends_on:
       - config-server
       - eureka-server
-  #    restart: on-failure
+    restart: on-failure
 
   secondmicroservice:
     image: mycompany/secondmicroservice:0.0.1-SNAPSHOT
@@ -144,6 +146,7 @@ services:
       - config-server
       - datasource
       - eureka-server
+      - kafkaserver
     restart: on-failure
     networks:
       backend:
@@ -187,7 +190,9 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 1234
-      MYSQL_DATABASE: first_microservice
+#      MYSQL_DATABASE: first_microservice
+    volumes:
+      - ./ddl.sql:/docker-entrypoint-initdb.d/ddl.sql
     ports:
       - "3306:3306"
     networks:
@@ -242,7 +247,8 @@ services:
       backend:
         aliases:
           - "keycloak"
-
+    depends_on:
+      - datasource
 
 networks:
   backend:
